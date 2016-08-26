@@ -19,7 +19,10 @@ committing realizes that there is no way to recover those changes, this script t
 
 ## Installing
 
-TODO
+```bash
+sudo curl -sSL -o /usr/local/bin/git-undo-index https://raw.githubusercontent.com/weikinhuang/git-undo-index/master/git-undo-index
+chmod +x /usr/local/bin/git-undo-index
+```
 
 ## Usage
 
@@ -97,3 +100,7 @@ index 2a02d41..0f7c719 100644
  TEST
 +1
 ```
+
+## Developing
+
+TODO
