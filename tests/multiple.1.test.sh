@@ -3,17 +3,17 @@
 function test-expectations() {
     local REF_ENTRY="$(git reflog | grep ' commit: Undoing changes for master: test commit on ' | head -n1 | cut -f2 -d' ' | tr -d ':')"
 
-    echo 'Expect reflog entry to exist'
+    describe 'Expect reflog entry to exist'
     git reflog | grep -q ' commit: Undoing changes for master: test commit on '
-    echo ' - ✓'
+    ok
 
-    echo 'Expect reflog entry contains undone changes'
+    describe 'Expect reflog entry contains undone changes'
     test "$(git show ${REF_ENTRY} | normalize-output)" == "$(cat /data/tests/expects/multiple.1.out)"
-    echo ' - ✓'
+    ok
 
-    echo 'Expect that there are no changes'
+    describe 'Expect that there are no changes'
     test -z "$(git status --short)"
-    echo ' - ✓'
+    ok
 }
 
 echo FILE2 > FILE2

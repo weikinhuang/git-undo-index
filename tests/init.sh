@@ -37,13 +37,21 @@ function normalize-output() {
             -e 's/index [0-9a-f]{7,}\.\.[0-9a-f]{7,} /index aaaaaaa..bbbbbbb /'
 }
 
+function describe() {
+    echo -e "\e[1m$1\e[0m"
+}
+
+function ok() {
+    echo -e ' - \e[32m✓\e[0m'
+}
+
 set -e
 #set -x
 
 for f in /data/tests/*; do
     case "$f" in
         *.test.sh)
-            echo "================ running $f ================ "
+            echo -e "\e[35m ================ running $f ================ \e[0m"
             run_test "$f"
             echo
         ;;
