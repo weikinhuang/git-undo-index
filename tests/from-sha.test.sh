@@ -8,7 +8,7 @@ function test-expectations() {
     ok
 
     describe 'Expect reflog entry contains undone changes'
-    test "$(git show ${REF_ENTRY} | normalize-output)" == "$(cat /data/tests/expects/from-sha.1.out)"
+    test "$(git show ${REF_ENTRY} | normalize-output)" == "$(cat /data/tests/expects/from-sha.out)"
     ok
 
     describe 'Expect that there are no changes'
