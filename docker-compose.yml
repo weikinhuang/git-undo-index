@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/data
+    command: [ bash, /data/tests/init.sh ]

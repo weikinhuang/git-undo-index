@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # A git checkout -- replacement that stores changes in the reflog
 #
@@ -6,8 +6,12 @@
 # MIT Licensed
 
 # colors
-COLOR_BOLD=$(tput bold)
-COLOR_RESET=$(tput sgr0)
+COLOR_BOLD=
+COLOR_RESET=
+if type tput &>/dev/null; then
+    COLOR_BOLD=$(tput bold)
+    COLOR_RESET=$(tput sgr0)
+fi
 
 # variables
 UNIXTIME="$(date +%s)"
@@ -34,17 +38,23 @@ fi
 git checkout -- "$@"
 #git status
 
+# determine if there are any changes to stash
+USE_STASH="$(git status --short --untracked-files no)"
+
 # create a temp stash for changes we're actually keeping
-git stash save "temp stash: ${TEMP_BRANCH_NAME}"
-#git status
+if [ -n "$USE_STASH" ]; then
+    git stash save "temp stash: ${TEMP_BRANCH_NAME}"
+    #git status
 
-# reapply the changes we're keeping so we can keep cherry-pick from the reflog happy
-git stash apply --index "stash@{0}"
-#git status
+    # reapply the changes we're keeping so we can keep cherry-pick from the reflog happy
+    git stash apply --index "stash@{0}"
+    #git status
 
-# commit changes that we're keeping also for cherry-pick purposes
-git commit -a -m"WIP ${TEMP_BRANCH_NAME}"
-#git status
+    # commit changes that we're keeping also for cherry-pick purposes
+    git commit -a -m"WIP ${TEMP_BRANCH_NAME}" || true
+    #git status
+fi
+
 
 # apply the changes we're discarding
 echo "$GIT_DIFF" | git apply
@@ -65,8 +75,10 @@ git checkout - 1>&2
 #git status
 
 # reapply all the changes we're keeping along with the staged state of each file
-git stash pop --index "stash@{0}"
-#git status
+if [ -n "$USE_STASH" ]; then
+    git stash pop --index "stash@{0}"
+    #git status
+fi
 
 # remove the temp branch
 git branch -D $TEMP_BRANCH_NAME 1>&2
@@ -91,10 +103,6 @@ fi
 #fi
 
 # test cases
-#
-# Undo changes to single file
-# date +%s >> TIME
-# git undo1 TIME
 #
 # Undo changes to multiple files
 # date +%s >> TIME && date > DATE
