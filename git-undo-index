@@ -101,25 +101,3 @@ fi
 #    echo "${COLOR_BOLD}Removing \"$(git reflog | grep "checkout: moving from ${TEMP_BRANCH_NAME} to" | head -n1 | cut -f3- -d' ')\" from reflog${COLOR_RESET}" 1>&2
 #    git reflog delete "$(git reflog | grep "checkout: moving from ${TEMP_BRANCH_NAME} to" | head -n1 | cut -f2 -d' ' | tr -d ':')" 1>&2
 #fi
-
-# test cases
-#
-# Undo changes to multiple files
-# date +%s >> TIME && date > DATE
-# git undo1 .
-#
-# Undo changes that are not staged but has staged changes
-# date +%s >> TIME && date > DATE && git add TIME && echo $(date +%s)a >> TIME
-# git undo1 TIME
-#
-# Undo a different file but has a deletion WIP
-# date +%s >> TIME && date > DATE && git add TIME && echo $(date +%s)a >> TIME && rm -f DATE
-# git undo1 TIME
-#
-# Undo a deletion
-# date +%s >> TIME && date > DATE && git add TIME && echo $(date +%s)a >> TIME && rm -f DATE
-# git undo1 DATE
-#
-# Undo all changes that has a deletion entry
-# date +%s >> TIME && date > DATE && git add TIME && echo $(date +%s)a >> TIME && rm -f DATE
-# git undo1 .
