@@ -37,12 +37,16 @@ function normalize-output() {
             -e 's/index [0-9a-f]{7,}\.\.[0-9a-f]{7,} /index aaaaaaa..bbbbbbb /'
 }
 
+function heading() {
+    echo -e " - \e[1m$1\e[0m"
+}
+
 function describe() {
-    echo -e "\e[1m$1\e[0m"
+    echo -e "   - $1"
 }
 
 function ok() {
-    echo -e ' - \e[32m✓\e[0m'
+    echo -e '     - \e[32m✓\e[0m'
 }
 
 set -e
