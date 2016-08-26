@@ -1,0 +1,13 @@
+commit aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Author: Test Runner <foo@example.com>
+Date:   Fri Aug 26 00:00:00 2016 +0000
+
+    Undoing changes for master: test commit on Fri Aug 26 00:00:00 UTC 2016
+
+diff --git a/TEST b/TEST
+index aaaaaaa..bbbbbbb 100644
+--- a/TEST
++++ b/TEST
+@@ -1 +1,2 @@
+ TEST
++1
