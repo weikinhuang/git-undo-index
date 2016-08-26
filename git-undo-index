@@ -39,7 +39,7 @@ git checkout -- "$@"
 #git status
 
 # determine if there are any changes to stash
-USE_STASH="$(git status --short --untracked-files no)"
+USE_STASH="$(git status --short --untracked-files=no)"
 
 # create a temp stash for changes we're actually keeping
 if [ -n "$USE_STASH" ]; then
@@ -54,7 +54,6 @@ if [ -n "$USE_STASH" ]; then
     git commit -a -m"WIP ${TEMP_BRANCH_NAME}" || true
     #git status
 fi
-
 
 # apply the changes we're discarding
 echo "$GIT_DIFF" | git apply

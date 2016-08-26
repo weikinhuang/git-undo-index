@@ -8,6 +8,6 @@ diff --git a/TEST b/TEST
 index aaaaaaa..bbbbbbb 100644
 --- a/TEST
 +++ b/TEST
-@@ -1 +1,2 @@
- TEST
-+1
+@@ -1 +1 @@
+-1
++2
