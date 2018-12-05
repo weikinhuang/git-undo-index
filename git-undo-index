@@ -53,7 +53,7 @@ if [ -n "$USE_STASH" ]; then
     #git status
 
     # commit changes that we're keeping also for cherry-pick purposes
-    git commit -a -m"WIP ${TEMP_BRANCH_NAME}" &>/dev/null || true
+    git commit --no-verify -a -m"WIP ${TEMP_BRANCH_NAME}" &>/dev/null || true
     #git status
 fi
 
@@ -68,7 +68,7 @@ git add --verbose --update "$@" &>/dev/null
 
 # commit all the files we're discarding
 #echo "${COLOR_BOLD}Creating commit entry for reflog${COLOR_RESET}" 1>&2
-git commit -m"Undoing changes for ${CURRENT_HEAD}: ${COMMIT_MESSAGE} on $(date)"
+git commit --no-verify -m"Undoing changes for ${CURRENT_HEAD}: ${COMMIT_MESSAGE} on $(date)"
 #git status
 
 # prevent any unnecessary change detection when going back to the previous branch
