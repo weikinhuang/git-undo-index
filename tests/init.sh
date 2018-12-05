@@ -31,8 +31,8 @@ function run_test() {
 
 # mock the date function for testing
 function normalize-output() {
-    sed -r  -e 's/[A-Za-z]{3} [A-Za-z]{3} [0-9]+ [0-9]{2}:[0-9]{2}:[0-9]{2} UTC [0-9]{4}/Fri Aug 26 00:00:00 UTC 2016/g' \
-            -e 's/[A-Za-z]{3} [A-Za-z]{3} [0-9]+ [0-9]{2}:[0-9]{2}:[0-9]{2} [0-9]{4} \+0000/Fri Aug 26 00:00:00 2016 +0000/g' \
+    sed -r  -e 's/[A-Za-z]{3} [A-Za-z]{3} +[0-9]+ [0-9]{2}:[0-9]{2}:[0-9]{2} UTC [0-9]{4}/Fri Aug 26 00:00:00 UTC 2016/g' \
+            -e 's/[A-Za-z]{3} [A-Za-z]{3} +[0-9]+ [0-9]{2}:[0-9]{2}:[0-9]{2} [0-9]{4} \+0000/Fri Aug 26 00:00:00 2016 +0000/g' \
             -e 's/^commit [0-9a-f]{40}$/commit aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/' \
             -e 's/index [0-9a-f]{7,}\.\.[0-9a-f]{7,} /index aaaaaaa..bbbbbbb /'
 }
